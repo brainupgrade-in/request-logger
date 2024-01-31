@@ -1,0 +1,26 @@
+{
+    "java.jdt.ls.java.home": "/usr/lib/jvm/msopenjdk-current/", // Specify JDK path if not detected automatically
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ],
+    "java.format.settings.url": "https://raw.githubusercontent.com/spring-io/spring-javaformat/master/src/checkstyle/checkstyle.xml",
+    "java.format.settings.profile": "Spring",
+    "spring-boot.ls.java.home": "/usr/lib/jvm/msopenjdk-current/", // Specify Spring Boot Language Server's Java home if different
+    "spring-boot.dashboard.openInNewWindow": false,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/target": true
+    },
+    "files.watcherExclude": {
+        "**/target/**": true
+    },
+    "[java]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.compile.nullAnalysis.mode": "disabled"
+}
