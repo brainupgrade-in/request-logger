@@ -1,1 +1,1 @@
-workflow test
+test callable workflow
