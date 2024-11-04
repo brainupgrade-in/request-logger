@@ -1,0 +1,37 @@
+trigger: none
+
+pool:
+  #  vmImage: 'ubuntu-latest'
+  name: selfhosted
+
+steps:
+
+# Agent openjdk and maven on the build agent
+# apt update && apt install -y openjdk-11-jdk && sudo install -y maven
+# setup env in the maven task as  shown below
+
+ - task: AdvancedSecurity-Codeql-Init@1
+   inputs:
+      languages: "java"
+      # Supported languages: csharp, cpp, go, java, javascript, python, ruby, swift
+      # You can customize the initialize task: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/advanced-security-codeql-init-v1?view=azure-pipelines
+      # If you're using a self-hosted agent to run CodeQL, use `enableAutomaticCodeQLInstall` to automatically use the latest CodeQL bits on your agent:
+      enableAutomaticCodeQLInstall: true
+
+ - task: Maven@4
+   inputs:
+     mavenPomFile: 'pom.xml'
+     mavenOptions: '-Xmx3072m'
+     javaHomeOption: 'JDKVersion'
+     jdkVersionOption: '1.11'
+     jdkArchitectureOption: 'x64'
+     publishJUnitResults: false
+     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+     goals: 'package'
+   env:
+     JAVA_HOME_11_X64: "/usr/lib/jvm/java-11-openjdk-amd64"
+     PATH: "/usr/lib/jvm/java-11-openjdk-amd64/bin:$(PATH)"     
+
+ - task: AdvancedSecurity-Dependency-Scanning@1
+
+ - task: AdvancedSecurity-Codeql-Analyze@1
