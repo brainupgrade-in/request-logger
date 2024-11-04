@@ -15,7 +15,7 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+    goals: 'package test'
   env:
     JAVA_HOME_11_X64: "/usr/lib/jvm/java-11-openjdk-amd64"
     PATH: "/usr/lib/jvm/java-11-openjdk-amd64/bin:$(PATH)"     
