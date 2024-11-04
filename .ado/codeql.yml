@@ -6,7 +6,7 @@ pool:
 steps:
 - task: AdvancedSecurity-Codeql-Init@1
   inputs:
-    tools: 'CodeQLDefault'
+    enableAutomaticCodeQLInstall: true
     languages: 'java'
 
 - task: Bash@3
