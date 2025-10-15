@@ -34,7 +34,7 @@ jobs:
          sonar.host.url: https://sonarcloud.io 
          sonar.organization: brainupgrade-in_request-logger
          sonar.projectKey: brainupgrade-in
-      run: mvn -B package sonar:sonar -Dsonar.host.url=${{sonar.host.url}} -Dsonar.organization=${{sonar.organization}} -Dsonar.projectKey=${{sonar.projectKey}}  -Pcoverage --file pom.xml 
+      run: mvn -B package sonar:sonar -Dsonar.host.url=${{ sonar.host.url }} -Dsonar.organization=${{ sonar.organization }} -Dsonar.projectKey=${{ sonar.projectKey }}  -Pcoverage --file pom.xml 
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
