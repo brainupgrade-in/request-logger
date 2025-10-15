@@ -5,6 +5,13 @@ pool:
   # name: selfhosted
 
 steps:
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '11'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+    displayName: 'Set up JDK 11'
+
   - task: Maven@4
     inputs:
       mavenPomFile: "pom.xml"
@@ -15,7 +22,4 @@ steps:
       publishJUnitResults: false
       testResultsFiles: "**/surefire-reports/TEST-*.xml"
       goals: "package"
-    env:
-      JAVA_HOME_11_X64: "/usr/lib/jvm/java-11-openjdk-amd64"
-      JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
-      PATH: "/usr/lib/jvm/java-11-openjdk-amd64/bin:$(PATH)"
+    displayName: 'Maven package'
