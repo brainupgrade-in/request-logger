@@ -4,15 +4,27 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>in.brainupgrade</groupId>
-	<artifactId>request-logger</artifactId>
-	<version>1.0.0</version>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.6.RELEASE</version>
+		<version>3.3.5</version>
+		<relativePath/>
 	</parent>
+
+	<groupId>in.brainupgrade</groupId>
+	<artifactId>request-logger</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>request-logger</name>
+	<description>Request Logger Application</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<java.version>17</java.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -21,35 +33,30 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.0</version>
-			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackson.version>2.9.0</jackson.version>
-	</properties>
 
 	<build>
 		<finalName>app</finalName>
@@ -57,41 +64,50 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 	<profiles>
-<profile>
-  <id>coverage</id>
-  <build>
-   <plugins>
-    <plugin>
-      <groupId>org.jacoco</groupId>
-     <artifactId>jacoco-maven-plugin</artifactId>
-      <version>0.8.7</version>
-      <executions>
-        <execution>
-          <id>prepare-agent</id>
-          <goals>
-            <goal>prepare-agent</goal>
-          </goals>
-        </execution>
-        <execution>
-          <id>report</id>
-          <goals>
-            <goal>report</goal>
-          </goals>
-          <configuration>
-            <formats>
-              <format>XML</format>
-            </formats>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
-   </plugins>
-  </build>
-</profile>	
+		<profile>
+			<id>coverage</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.8.11</version>
+						<executions>
+							<execution>
+								<id>prepare-agent</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>report</id>
+								<goals>
+									<goal>report</goal>
+								</goals>
+								<configuration>
+									<formats>
+										<format>XML</format>
+									</formats>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<profile>
 			<id>default</id>
 			<build>
@@ -125,7 +141,7 @@
 					<plugin>
 						<groupId>com.spotify</groupId>
 						<artifactId>dockerfile-maven-plugin</artifactId>
-						<version>1.3.6</version>
+						<version>1.4.13</version>
 						<executions>
 							<execution>
 								<id>default</id>
